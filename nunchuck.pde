@@ -64,6 +64,6 @@ void loop() {
     Serial.print (bc, DEC);
     Serial.print ("\n");
   }
-  delay(2000);
+  delay(100);
 }
 
