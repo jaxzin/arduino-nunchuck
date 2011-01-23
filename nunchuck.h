@@ -18,6 +18,8 @@ void nunchuck_init() {
  * jx/y:   Joystick, ranging from -128 to 127
  * ax/y/z: Acceleration, ranging from -512 to 511
  * bz/c:   Buttons; 1 means pressed, 0 means released
+ *
+ * Returns 1 on success, 0 on failure.
  */
 int nunchuck_read(int *jx, int *jy,
                   int *ax, int *ay, int *az,
