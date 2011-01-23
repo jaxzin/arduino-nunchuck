@@ -1,6 +1,7 @@
 #ifndef __NUNCHUCK_H__
 #define __NUNCHUCK_H__
 
+#include <WProgram.h>
 #include <Wire.h>
 
 /*
@@ -9,46 +10,34 @@
  */
 void nunchuck_init() {
   Wire.begin();
-  Wire.beginTransmission(0x52);
-  Wire.send(0x40);
-  Wire.send(0x00);
-  Wire.endTransmission();
 }
 
 /*
- * Requests new values from the nunchuck.  Call this before reading nunchuck
- * values, and give the nunchuck a millisecond or so to respond.
- */
-void nunchuck_request() {
-  Wire.beginTransmission(0x52);
-  Wire.send(0x00);
-  Wire.endTransmission();
-}
-
-/*
- * Reads the current values from the nunchuck.  Make sure that
- * nunchuck_request() is before every call to this function, and make sure
- * to wait at least a millisecond or so before reading values.
+ * Reads the current values from the nunchuck.
  */
 int nunchuck_read(int *jx, int *jy,
                   int *ax, int *ay, int *az,
                   int *bz, int *bc) {
-  int outbuf[6];
-  int cnt = 0;
+  Wire.beginTransmission(0x52); // Request new values from nunchuck.
+  Wire.send(0x00);
+  Wire.endTransmission();
+  delayMicroseconds(200); // Give nunchuck time to respond.
   Wire.requestFrom(0x52, 6);
+  byte buf[8];  // Allocate extra space just in case.
+  int cnt = 0;
   while (Wire.available()) {
-    outbuf[cnt++] = (Wire.receive() ^ 0x17) + 0x17;
+    buf[cnt++] = (Wire.receive() ^ 0x17) + 0x17;
   }
   if (cnt < 6) {
     return 0;
   }
-  *jx = outbuf[0] - 128;
-  *jy = outbuf[1] - 128;
-  int b = outbuf[5];
-  *ax = (outbuf[2] << 2 | ((b >> 2) & 3)) - 512;
-  *ay = (outbuf[3] << 2 | ((b >> 4) & 3)) - 512;
-  *az = (outbuf[4] << 2 | ((b >> 6) & 3)) - 512;
-  *bz = ((b >> 0) & 1) ^ 1;
+  *jx = buf[0] - 128;
+  *jy = buf[1] - 128;
+  byte b = buf[5];
+  *ax = ((buf[2] << 2) | ((b >> 2) & 3)) - 512;
+  *ay = ((buf[3] << 2) | ((b >> 4) & 3)) - 512;
+  *az = ((buf[4] << 2) | ((b >> 6) & 3)) - 512;
+  *bz = (b & 1) ^ 1;
   *bc = ((b >> 1) & 1) ^ 1;
   return 1;
 }

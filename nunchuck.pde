@@ -6,14 +6,12 @@
 #include "nunchuck.h"
 
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(115200);
   Serial.print("Finished setup\n");
   nunchuck_init();
 }
 
 void loop() {
-  nunchuck_request();
-  delay(1); // give nunchuck time to respond
   int jx, jy, ax, ay, az, bz, bc;
   if (nunchuck_read(&jx, &jy, &ax, &ay, &az, &bz, &bc)) {
     Serial.print (jx, DEC);
