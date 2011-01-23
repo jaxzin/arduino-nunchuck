@@ -3,6 +3,10 @@
 
 #include <Wire.h>
 
+/*
+ * Initializes I2C communication with the nunchuck.  Call this in the setup
+ * function.
+ */
 void nunchuck_init() {
   Wire.begin();
   Wire.beginTransmission(0x52);
@@ -11,12 +15,21 @@ void nunchuck_init() {
   Wire.endTransmission();
 }
 
+/*
+ * Requests new values from the nunchuck.  Call this before reading nunchuck
+ * values, and give the nunchuck a millisecond or so to respond.
+ */
 void nunchuck_request() {
   Wire.beginTransmission(0x52);
   Wire.send(0x00);
   Wire.endTransmission();
 }
 
+/*
+ * Reads the current values from the nunchuck.  Make sure that
+ * nunchuck_request() is before every call to this function, and make sure
+ * to wait at least a millisecond or so before reading values.
+ */
 int nunchuck_read(int *jx, int *jy,
                   int *ax, int *ay, int *az,
                   int *bz, int *bc) {
@@ -41,4 +54,3 @@ int nunchuck_read(int *jx, int *jy,
 }
 
 #endif
-

@@ -1,6 +1,8 @@
 #include <string.h>
 #include <stdio.h>
-#include <Wire.h>
+#include <Wire.h> // This seems redundant, but we need to declare this
+                  // dependency in the pde file or else it won't be included
+                  // in the build.
 #include "nunchuck.h"
 
 void setup() {
@@ -11,7 +13,7 @@ void setup() {
 
 void loop() {
   nunchuck_request();
-  delay(5);
+  delay(1); // give nunchuck time to respond
   int jx, jy, ax, ay, az, bz, bc;
   if (nunchuck_read(&jx, &jy, &ax, &ay, &az, &bz, &bc)) {
     Serial.print (jx, DEC);
@@ -31,4 +33,3 @@ void loop() {
   }
   delay(100);
 }
-
