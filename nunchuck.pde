@@ -1,3 +1,8 @@
+/* Copyright (c) 2011 Peter Brinkmann (peter.brinkmann@gmail.com)
+ * For information on usage and redistribution, and for a DISCLAIMER OF ALL
+ * WARRANTIES, see the file, "LICENSE.txt," in this distribution.
+ */
+
 #include <string.h>
 #include <stdio.h>
 #include <Wire.h> // This seems redundant, but we need to declare this
