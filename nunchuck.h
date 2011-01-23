@@ -14,6 +14,10 @@ void nunchuck_init() {
 
 /*
  * Reads the current values from the nunchuck.
+ *
+ * jx/y:   Joystick, ranging from -128 to 127
+ * ax/y/z: Acceleration, ranging from -512 to 511
+ * bz/c:   Buttons; 1 means pressed, 0 means released
  */
 int nunchuck_read(int *jx, int *jy,
                   int *ax, int *ay, int *az,
@@ -23,7 +27,7 @@ int nunchuck_read(int *jx, int *jy,
   Wire.endTransmission();
   delayMicroseconds(200); // Give nunchuck time to respond.
   Wire.requestFrom(0x52, 6);
-  byte buf[8];  // Allocate extra space just in case.
+  byte buf[8];  // Allocate a few extra bytes just in case.
   int cnt = 0;
   while (Wire.available()) {
     buf[cnt++] = (Wire.receive() ^ 0x17) + 0x17;
