@@ -9,7 +9,10 @@
  * function.
  */
 void nunchuck_init() {
-  Wire.begin();
+  Wire.begin();  Wire.beginTransmission(0x52);
+  Wire.send(0x40);
+  Wire.send(0x00);
+  Wire.endTransmission();
 }
 
 /*
