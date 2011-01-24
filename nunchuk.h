@@ -4,7 +4,8 @@
  * For information on usage and redistribution, and for a DISCLAIMER OF ALL
  * WARRANTIES, see the file, "LICENSE.txt," in this distribution.
  *
- * Bare-bones Nintendo Nunchuk library for Arduino.
+ * Bare-bones Nintendo Nunchuk library for Arduino, loosely based on code
+ * found at http://www.windmeadow.com/node/42.
  *
  * Here's how to connect the Arduino to the Nunchuk:
  *      Arduino    Nunchuk
