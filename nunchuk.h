@@ -1,6 +1,9 @@
 /*
  * Copyright (c) 2011 Peter Brinkmann (peter.brinkmann@gmail.com)
  *
+ * For information on usage and redistribution, and for a DISCLAIMER OF ALL
+ * WARRANTIES, see the file, "LICENSE.txt," in this distribution.
+ *
  * Bare-bones Nintendo Nunchuk library for Arduino.
  *
  * Here's how to connect the Arduino to the Nunchuk:
@@ -13,9 +16,6 @@
  * I'm using an Arduino Nano.  I believe there are Arduinos out there that
  * don't supply 3.3V, and I've heard of people who have successfully powered
  * the Nunchuk with 5V, but I wouldn't recommend that.
- *
- * For information on usage and redistribution, and for a DISCLAIMER OF ALL
- * WARRANTIES, see the file, "LICENSE.txt," in this distribution.
  */
 
 #ifndef __NUNCHUK_H__
