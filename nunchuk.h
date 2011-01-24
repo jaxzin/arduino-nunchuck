@@ -17,6 +17,11 @@
  * I'm using an Arduino Nano.  I believe there are Arduinos out there that
  * don't supply 3.3V, and I've heard of people who have successfully powered
  * the Nunchuk with 5V, but I wouldn't recommend that.
+ *
+ * Note that some online instructions for using a nunchuk with Arduino call
+ * for changes to twi.h.  Fortunately, this modification is no longer
+ * necessary.  Just use a current version of the Arduino development
+ * environment.
  */
 
 #ifndef __NUNCHUK_H__
