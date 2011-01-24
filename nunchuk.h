@@ -52,8 +52,8 @@ void nunchuk_init() {
  * Returns 1 on success, 0 on failure.
  */
 int nunchuk_read(int *jx, int *jy,
-                  int *ax, int *ay, int *az,
-                  int *bz, int *bc) {
+                 int *ax, int *ay, int *az,
+                 int *bz, int *bc) {
   Wire.beginTransmission(0x52); // Request new values from nunchuk.
   Wire.send(0x00);
   Wire.endTransmission();
