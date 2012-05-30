@@ -37,8 +37,8 @@
 void nunchuk_init() {
   Wire.begin();
   Wire.beginTransmission(0x52);
-  Wire.send(0x40);
-  Wire.send(0x00);
+  Wire.write((byte)0x40);
+  Wire.write((byte)0x00);
   Wire.endTransmission();
 }
 
@@ -55,14 +55,14 @@ int nunchuk_read(int *jx, int *jy,
                  int *ax, int *ay, int *az,
                  int *bz, int *bc) {
   Wire.beginTransmission(0x52); // Request new values from nunchuk.
-  Wire.send(0x00);
+  Wire.write((byte)0x00);
   Wire.endTransmission();
   delayMicroseconds(200); // Give nunchuk time to respond.
   Wire.requestFrom(0x52, 6);
   byte buf[8];  // Allocate a few extra bytes just in case.
   int cnt = 0;
   while (Wire.available()) {
-    buf[cnt++] = (Wire.receive() ^ 0x17) + 0x17;
+    buf[cnt++] = (Wire.read() ^ 0x17) + 0x17;
   }
   if (cnt < 6) {
     return 0;
